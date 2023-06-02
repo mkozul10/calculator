@@ -4,9 +4,9 @@ const equlas=document.querySelector('[data-equals]');
 const allClearButton=document.querySelector('[data-all-clear]');
 const backSpace=document.querySelector('[data-backspace]');
 const point=document.querySelector('[data-point]');
-const buttons=document.querySelectorAll('button');
-buttons.forEach((button)=>{
-    button.addEventListener('click',populateDisplay);
+
+numbers.forEach((number)=>{
+    number.addEventListener('click',populateDisplay);
 });
 
 
