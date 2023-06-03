@@ -43,10 +43,17 @@ function operate(firstNumber,secondNumber,operator){
     }
 }
 
-const screen=document.querySelector('#display');
+const screen=document.querySelector('#screen');
 function populateDisplay(event){
-    displayValue=event.target.innerHTML;
+    screen.replaceChildren();
+    displayValue+=event.target.innerHTML;
     screen.append(displayValue);
+}
+
+allClearButton.addEventListener('click',clearScreen);
+function clearScreen(){
+    screen.replaceChildren();
+    displayValue='';
 }
 
 
