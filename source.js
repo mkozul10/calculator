@@ -14,6 +14,7 @@ var firstNumber;
 var secondNumber;
 var operator;
 var displayValue='';
+var pointState=0;
 
 
 function add(num1,num2){return num1+num2}
@@ -46,19 +47,34 @@ function operate(firstNumber,secondNumber,operator){
 const screen=document.querySelector('#screen');
 function populateDisplay(event){
     screen.replaceChildren();
-    displayValue+=event.target.innerHTML;
-    screen.append(displayValue);
+    if(event.target.innerHTML==='.')
+    {
+        pointState++;
+        if(pointState===1)
+        {
+            displayValue+=event.target.innerHTML;
+            screen.append(displayValue);
+        }
+        else screen.append(displayValue);
+    }
+    else
+    {
+        displayValue+=event.target.innerHTML;
+        screen.append(displayValue);
+    }
 }
 
 allClearButton.addEventListener('click',clearScreen);
 function clearScreen(){
     screen.replaceChildren();
     displayValue='';
+    pointState=0;
 }
 
 
 backSpace.addEventListener('click',backspace);
 function backspace(){
+    if(displayValue[displayValue.length-1]==='.') pointState=0;
     displayValue=displayValue.replace(displayValue[displayValue.length-1],'');
     screen.replaceChildren();
     screen.append(displayValue);
