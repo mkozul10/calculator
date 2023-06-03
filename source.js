@@ -57,4 +57,12 @@ function clearScreen(){
 }
 
 
+backSpace.addEventListener('click',backspace);
+function backspace(){
+    displayValue=displayValue.replace(displayValue[displayValue.length-1],'');
+    screen.replaceChildren();
+    screen.append(displayValue);
+}
+
+
 
