@@ -12,18 +12,30 @@ numbers.forEach((number)=>{
 
 var firstNumber;
 var secondNumber;
-var operator;
+var operation;
 var displayValue='';
 var pointState=0;
 
 
-function add(num1,num2){return num1+num2}
+function add(num1,num2){
+    let rez=num1+num2;
+    postOperation(rez);
+}
 
-function subtract(num1,num2){return num1-num2}
+function subtract(num1,num2){
+    let rez=num1-num2;
+    postOperation(rez);
+}
 
-function multiply(num1,num2){return num1*num2}
+function multiply(num1,num2){
+    let rez=num1*num2;
+    postOperation(rez);
+}
 
-function divide(num1,num2){return num1/num2}
+function divide(num1,num2){
+    let rez=(num1/num2).toFixed(3);
+    postOperation(rez);
+}
 
 function operate(firstNumber,secondNumber,operator){
     switch(operator){
@@ -69,6 +81,9 @@ function clearScreen(){
     screen.replaceChildren();
     displayValue='';
     pointState=0;
+    firstNumber=undefined;
+    secondNumber=undefined;
+    operation=undefined;
 }
 
 backSpace.addEventListener('click',backspace);
@@ -77,6 +92,35 @@ function backspace(){
     displayValue=displayValue.slice(0,displayValue.length-1);
     screen.replaceChildren();
     screen.append(displayValue);
+}
+
+operators.forEach((operator)=>{
+    operator.addEventListener('click',preOperation)
+});
+
+function preOperation(event){
+    if(event.target.innerHTML==='='){
+        secondNumber= +displayValue;
+        pointState=0;
+    }
+    else
+    {
+        operation=event.target.innerHTML;
+        firstNumber= +displayValue;
+        displayValue='';
+        pointState=0;
+    }
+    if(!isNaN(firstNumber) && !isNaN(secondNumber)){
+        displayValue='';
+        operate(firstNumber,secondNumber,operation);
+    }
+}
+
+function postOperation(rez){
+    displayValue+=rez.toString();
+    screen.replaceChildren();
+    screen.append(displayValue);
+    displayValue='';
 }
 
 
