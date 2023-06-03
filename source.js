@@ -71,11 +71,10 @@ function clearScreen(){
     pointState=0;
 }
 
-
 backSpace.addEventListener('click',backspace);
 function backspace(){
     if(displayValue[displayValue.length-1]==='.') pointState=0;
-    displayValue=displayValue.replace(displayValue[displayValue.length-1],'');
+    displayValue=displayValue.slice(0,displayValue.length-1);
     screen.replaceChildren();
     screen.append(displayValue);
 }
